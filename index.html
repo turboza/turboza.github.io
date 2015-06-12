@@ -37,7 +37,16 @@
             $('#result').text('Failed to create new object, with error code: ' + error.message);
         }
         });
+        $('#itemName').val('');
+        $('#result').text('LOADING....');
+        $('#itemName').focus();
     }
+      
+    //$('$itemName').on('click', addNewItem());
+      $('#itemName').keypress(function(event){
+        if(event.keyCode == 13) addNewItem();
+      });
+      
   </script>
 </body>
 
