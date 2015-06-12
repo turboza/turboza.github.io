@@ -1,1 +1,44 @@
-Hello
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>My Parse App</title>
+  <meta name="description" content="My Parse App">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+</head>
+
+<body>
+  
+    <div id="main">
+        <input type="text" id="itemName"/>
+        <button onclick="addNewItem()">Add</button>
+    </div>
+    <div id="result"></div>
+
+  <script type="text/javascript">
+    Parse.initialize("w7I5idqkm2QbbNAokzje75smTu1EKuTdNBqTI2YT", "2XMi585PJ87L6HNHdJzM2nwnI6vgSMcpmsz03OwG");
+    
+    function addNewItem(){
+        var Item = Parse.Object.extend("Items");
+        var item = new Item();
+        
+        item.set("name", $('#itemName').val());
+        item.save(null, {
+        success: function(item) {
+        
+            $('#result').text('New object created with objectId: ' + item.id + '(' + item.get('name') + ')');
+        },
+        error: function(gameScore, error) {
+
+            $('#result').text('Failed to create new object, with error code: ' + error.message);
+        }
+        });
+    }
+  </script>
+</body>
+
+</html>
